@@ -1,4 +1,5 @@
 <script>
+  import FeedbackForm from './components/FeedbackForm.svelte';
   import FeedbackList from './components/FeedbackList.svelte';
   import FeedbackStats from './components/FeedbackStats.svelte';
 
@@ -18,10 +19,16 @@
     const itemId = e.detail;
     feedback = feedback.filter(item => item.id !== itemId);
   };
+
+  const handleAddFeedbackItem = e => {
+    const newFeedback = e.detail;
+    feedback = [...feedback, newFeedback];
+  };
 </script>
 
 <main class="container">
-  <FeedbackStats count={count} average={average} />
+  <FeedbackForm {feedback} on:submit-item={handleAddFeedbackItem} />
+  <FeedbackStats {count} {average} />
   <FeedbackList {feedback} on:delete-item={deleteFeedback} />
 </main>
 
