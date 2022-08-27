@@ -17,12 +17,13 @@
 
   const deleteFeedback = e => {
     const itemId = e.detail;
+    console.log(e.detail);
     feedback = feedback.filter(item => item.id !== itemId);
   };
 
   const handleAddFeedbackItem = e => {
     const newFeedback = e.detail;
-    feedback = [...feedback, newFeedback];
+    feedback = [newFeedback, ...feedback];
   };
 </script>
 
