@@ -1,12 +1,13 @@
 <script>
   import { fade, scale } from 'svelte/transition';
   import FeedbackItem from './FeedbackItem.svelte';
-  export let feedback = [];
+  import { FeedbackStore } from '../stores.js';
+
 </script>
 
 <!-- for each item in the feedback array create an h3 element that shows its text -->
-{#each feedback as item}
+{#each $FeedbackStore as item (item.id)}
   <div in:scale out:fade>
-    <FeedbackItem {item} on:delete-item />
+    <FeedbackItem {item} />
   </div>
 {/each}

@@ -1,25 +1,23 @@
 <script>
+  import { v4 as uuid } from 'uuid';
+  import { FeedbackStore } from '../stores.js';
   import Button from './Button.svelte';
   import Card from './Card.svelte';
   import RatingSelect from './RatingSelect.svelte';
-  import { createEventDispatcher } from 'svelte';
 
-  const dispatch = createEventDispatcher();
-  export let feedback;
   let selectedRating = 10;
   let comment;
   let btnDisabled = true;
   let message;
   const handleSubmit = () => {
     const newFeedback = {
-      id: feedback.length + 1,
+      id: uuid(),
       rating: Number(selectedRating),
       comment: comment
     };
-    selectedRating = null;
+    selectedRating = 10;
     comment = null;
-    console.log(newFeedback);
-    dispatch('submit-item', newFeedback);
+    FeedbackStore.update(feedback => [newFeedback, ...feedback]);
   };
 
   // handle the change event of the comment input field
